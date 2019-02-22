@@ -11,7 +11,7 @@ plugins {
 
 repositories {
     // Solo usado para desarrollo local
-    //maven("repo")
+    mavenLocal()
 
     // Mientras el plugin no tenga una versión estable, estará hospedado
     // como SNAPHOST. Este repositorio debe aparecer en build y settings.
@@ -26,10 +26,9 @@ repositories {
 dependencies {
     compile(kotlin("stdlib-jdk8"))
 
-    // La dependencia de Jasper Report debe ser declarada tanto para el
-    // proyecto (compile) como para el plugin (jasperreports).
+    // La dependencia de Jasper Report debe ser declarada en el
+    // proyecto (compile).
     compile("net.sf.jasperreports:jasperreports:6.7.0")
-    jasperreports("net.sf.jasperreports:jasperreports:6.7.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -37,14 +36,17 @@ tasks.withType<KotlinCompile> {
 }
 
 jasperreports {
+    // Versión de la librería
+    // Por defecto: ""
+    libraryVersion = "6.7.0"
     // Directorio con los archivos .jrxml
-    // Por defecto: src/main/jasperreports
-    inputReportsDir = "src/main/jasperreports"
+    // Por defecto: "src/main/jasperreports"
+    //inputReportsDir = "src/main/jasperreports"
     // Directorio para los archivos .jasper
-    // Por defecto: build/jasperreports
-    outputReportsDir = "build/jasperreports"
+    // Por defecto: "build/jasperreports"
+    //outputReportsDir = "$buildDir/jasperreports"
     // Nombre del conjunto de código fuente, por lo general es main.
-    // Por defecto: main
+    // Por defecto: ""
     sourceSet = "main"
 }
 
@@ -53,16 +55,16 @@ jasperreports {
 // de la compilación. A su vez, la tarea de empaquetado debe depender
 // de los reportes.
 
-val taskCompileJava = tasks.getByName("compileJava")
-val taskCompileKotlin = tasks.getByName("compileKotlin")
-val taskJasperReports = tasks.getByName("jasperreportsCompileReports")
+//val taskCompileJava = tasks.getByName("compileJava")
+//val taskCompileKotlin = tasks.getByName("compileKotlin")
+//val taskJasperReports = tasks.getByName("compileJasperReports")
 //val taskJar = tasks.getByName("jar")
-val taskWar = tasks.getByName("war")
+//val taskWar = tasks.getByName("war")
 
-taskJasperReports.dependsOn(taskCompileJava)
-taskJasperReports.dependsOn(taskCompileKotlin)
+//taskJasperReports.dependsOn(taskCompileJava)
+//taskJasperReports.dependsOn(taskCompileKotlin)
 //taskJar.dependsOn(taskJasperReports)
-taskWar.dependsOn(taskJasperReports)
+//taskWar.dependsOn(taskJasperReports)
 
 // Los reportes compilados deben también ser empaquetados, la tarea jar
 // es la responsable de empaquetar, por lo tanto, hay que reconfigurar.
@@ -73,9 +75,9 @@ taskWar.dependsOn(taskJasperReports)
 //    }
 //}
 
-tasks.withType<War> {
-    from("build/jasperreports") {
-        into("WEB-INF/classes")
-        include("**/*.jasper")
-    }
-}
+//tasks.withType<War> {
+//    from("build/jasperreports") {
+//        into("WEB-INF/classes")
+//        include("**/*.jasper")
+//    }
+//}

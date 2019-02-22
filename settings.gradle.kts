@@ -3,7 +3,7 @@ rootProject.name = "jasperreports-gradle-plugin-sample"
 pluginManagement {
     repositories{
         // Solo usado para desarrollo local
-        //maven("repo")
+        mavenLocal()
 
         // Mientras el plugin no tenga una versión estable, estará hospedado
         // como SNAPHOST. Este repositorio debe aparecer en build y settings.
