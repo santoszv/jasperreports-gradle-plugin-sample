@@ -9,7 +9,7 @@ pluginManagement {
         // como SNAPHOST. Este repositorio debe aparecer en build y settings.
         maven("https://oss.sonatype.org/content/repositories/snapshots/")
 
-        // Necesario para usar los puglins generales como el compilador de
+        // Necesario para usar los plugins generales como el compilador de
         // Java y Kotlin
         gradlePluginPortal()
     }

@@ -1,3 +1,4 @@
+import mx.com.inftel.oss.jasperreports.jasperReports
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -35,7 +36,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-jasperreports {
+jasperReports {
     // Versión de la librería
     // Por defecto: ""
     libraryVersion = "6.7.0"
